@@ -18,4 +18,7 @@ public class ConectarBanco {
         return conn;
     }
 
+    public Connection conectarBancoPostgresMySql(){
+        return null;
+    }
 }

@@ -112,6 +112,7 @@ public class ClienteDAO {
                 cliente.setCpf(rs.getString("cpf"));
                 cliente.setTelefone(rs.getString("telefone"));
             }
+            conn.close();
 
         } catch (SQLException | ClassNotFoundException e) {
             System.out.println(e.getMessage());

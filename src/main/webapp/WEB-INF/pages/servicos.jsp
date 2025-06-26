@@ -62,7 +62,7 @@
         </c:choose>
 
         <div class="mb-1">
-            <label for="descricao" class="form-label">Descrição:</label>
+            <label for="descricao" class="form-label">Nome:</label>
             <input type="text" class="form-control" id="descricao" placeholder="Descrição" name="descricao" required
                    value="${servico.descricao}">
         </div>

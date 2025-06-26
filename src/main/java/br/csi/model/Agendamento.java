@@ -8,18 +8,19 @@ public class Agendamento {
     private Date data;
     private Funcionario funcionario;
     private Cliente cliente;
+    private Servico servico;
     private String status;
 
-    public Agendamento(int id, Date data, Funcionario funcionario, Cliente cliente, String status) {
+    public Agendamento(int id, Date data, Funcionario funcionario, Cliente cliente, String status, Servico servico) {
         this.id = id;
         this.data = data;
         this.funcionario = funcionario;
         this.cliente = cliente;
         this.status = status;
+        this.servico = servico;
     }
 
     public Agendamento() {
-
     }
 
     public int getId() {
@@ -60,5 +61,13 @@ public class Agendamento {
 
     public void setStatus(String status) {
         this.status = status;
+    }
+
+    public Servico getServico() {
+        return servico;
+    }
+
+    public void setServico(Servico servico) {
+        this.servico = servico;
     }
 }

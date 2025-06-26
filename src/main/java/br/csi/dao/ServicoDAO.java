@@ -85,6 +85,7 @@ public class ServicoDAO {
 
                 servicos.add(servico);
             }
+            conn.close();
         } catch (SQLException | ClassNotFoundException e) {
             System.out.println(e.getMessage());
             System.out.println("Erro ao listar servicos");

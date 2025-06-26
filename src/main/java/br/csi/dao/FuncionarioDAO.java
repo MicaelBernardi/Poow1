@@ -94,6 +94,7 @@ public class FuncionarioDAO {
                 funcionarios.add(funcionario);
             }
 
+            conn.close();
 
         } catch (SQLException | ClassNotFoundException e) {
             System.out.println(e.getMessage());

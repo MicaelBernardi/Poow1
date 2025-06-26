@@ -27,6 +27,9 @@
                 <li class="nav-item">
                     <a class="nav-link" href="funcionario">Funcionários</a>
                 </li>
+                <li class="nav-item">
+                    <a class="nav-link" href="agendamento">Agendamentos</a>
+                </li>
             </ul>
 
             <ul class="navbar-nav ms-auto mb-2 mb-lg-0 me-5">
@@ -40,7 +43,8 @@
 </nav>
 
 <div class="container mt-5">
-    <h1 class="text-center mb-4">Agendamento de Revisões</h1>
+    <h1 class="text-center mb-4">Agendamento de Revisões para Clientes</h1>
+    <p class="text-center mb-5">Utilize os atalhos abaixo para acessar os cadastros:</p>
     <div class="row">
         <div class="col-md-4">
             <div class="card text-center mb-4">
