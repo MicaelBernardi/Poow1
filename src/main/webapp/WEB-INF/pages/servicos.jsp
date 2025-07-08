@@ -1,6 +1,6 @@
 <%@page contentType="text/html; charset=UTF-8" language="java" %>
 <%@taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
-<%@ taglib prefix="C" uri="http://java.sun.com/jsp/jstl/core" %>
+<%@taglib prefix="form" uri="http://www.springframework.org/tags/form" %>
 <%@page isELIgnored="false" %>
 
 <html>
@@ -8,7 +8,6 @@
     <title>Servicos</title>
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.6/dist/css/bootstrap.min.css" rel="stylesheet"
           integrity="sha384-4Q6Gf2aSP4eDXB8Miphtr37CMZZQ5oXLH2yaXMJ2w8e2ZtHTl7GptT4jmndRuHDT" crossorigin="anonymous">
-
 </head>
 <body>
 
@@ -21,26 +20,15 @@
         </button>
         <div class="collapse navbar-collapse" id="navbarNav">
             <ul class="navbar-nav">
-                <li class="nav-item">
-                    <a class="nav-link" href="inicio">Página Inicial</a>
-                </li>
-                <li class="nav-item">
-                    <a class="nav-link" href="cliente">Clientes</a>
-                </li>
-                <li class="nav-item">
-                    <a class="nav-link active" href="servico" aria-current="page">Servicos</a>
-                </li>
-                <li class="nav-item">
-                    <a class="nav-link" href="funcionario">Funcionarios</a>
-                </li>
+                <li class="nav-item"><a class="nav-link" href="inicio">Página Inicial</a></li>
+                <li class="nav-item"><a class="nav-link" href="cliente">Clientes</a></li>
+                <li class="nav-item"><a class="nav-link active" href="servico" aria-current="page">Servicos</a></li>
+                <li class="nav-item"><a class="nav-link" href="funcionario">Funcionarios</a></li>
+                <li class="nav-item"><a class="nav-link" href="agendamento">Agendamentos</a></li>
             </ul>
-
             <ul class="navbar-nav ms-auto mb-2 mb-lg-0 me-5">
-                <li class="nav-item">
-                    <a class="nav-link" href="login">Sair</a>
-                </li>
+                <li class="nav-item"><a class="nav-link" href="login">Sair</a></li>
             </ul>
-
         </div>
     </div>
 </nav>
@@ -48,48 +36,30 @@
 <h1 class="text-center">Cadastro de servicos</h1>
 
 <div class="d-flex justify-content-lg-center">
-    <form action="servico" method="post" class="w-50">
-
-        <c:choose>
-            <c:when test="${servico.id != null}">
-                <h2>Editar Servico</h2>
-                <input type="hidden" name="idservico" value="${servico.id}">
-            </c:when>
-            <c:otherwise>
-                <h2>Adicionar Servico</h2>
-                <input type="hidden" name="idservico" value="0">
-            </c:otherwise>
-        </c:choose>
+    <form:form action="servico" method="post" modelAttribute="servico" class="w-50">
+        <h2>${servico.id != null && servico.id > 0 ? 'Editar Servico' : 'Adicionar Servico'}</h2>
+        <form:hidden path="id"/>
 
         <div class="mb-1">
-            <label for="descricao" class="form-label">Nome:</label>
-            <input type="text" class="form-control" id="descricao" placeholder="Descrição" name="descricao" required
-                   value="${servico.descricao}">
+            <form:label path="descricao" class="form-label">Descricao:</form:label>
+            <form:input path="descricao" class="form-control" placeholder="Descricao" required="true"/>
         </div>
 
         <div class="mb-1">
-            <label for="valor" class="form-label">Valor:</label>
-            <input type="number" class="form-control" id="valor" placeholder="Valor" name="valor" required
-                   value="${servico.valor}">
+            <form:label path="valor" class="form-label">Valor:</form:label>
+            <form:input path="valor" class="form-control" placeholder="Valor" required="true" type="number" step="0.01"/>
         </div>
 
-        <c:choose>
-            <c:when test="${servico.id != null}">
-                <button type="submit" value="Alterar" name="gravar" class="btn btn-primary">Alterar</button>
-            </c:when>
-            <c:otherwise>
-                <button type="submit" value="Cadastrar" name="gravar" class="btn btn-primary">Cadastrar</button>
-            </c:otherwise>
-        </c:choose>
-    </form>
+        <input type="submit" value="${servico.id != null && servico.id > 0 ? 'Alterar' : 'Cadastrar'}" class="btn btn-primary mt-3"/>
+    </form:form>
 </div>
 
 <div class="d-flex justify-content-lg-center mb-2">
     <c:if test="${not empty msg}">
         <h3 class="text-center"><u>${msg}</u></h3>
     </c:if>
-
 </div>
+
 <div class="d-flex justify-content-lg-center">
     <h1 class="text-center">Lista de Servicos</h1>
 </div>
@@ -104,8 +74,8 @@
                 <td>${servico.descricao}</td>
                 <td>${servico.valor}</td>
                 <td>
-                    <a href="servico?opcao=editar&&info=${servico.id}" class="btn btn-warning btn-sm me-2">Editar</a>
-                    <a href="servico?opcao=excluir&&info=${servico.id}" class="btn btn-danger btn-sm">Excluir</a>
+                    <a href="servico/editar/${servico.id}" class="btn btn-warning btn-sm me-2">Editar</a>
+                    <a href="servico/excluir/${servico.id}" class="btn btn-danger btn-sm">Excluir</a>
                 </td>
             </tr>
         </c:forEach>

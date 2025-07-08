@@ -1,6 +1,6 @@
 <%@page contentType="text/html; charset=UTF-8" language="java" %>
 <%@taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
-<%@ taglib prefix="C" uri="http://java.sun.com/jsp/jstl/core" %>
+<%@taglib prefix="form" uri="http://www.springframework.org/tags/form" %>
 <%@page isELIgnored="false" %>
 
 <html>
@@ -20,99 +20,75 @@
         </button>
         <div class="collapse navbar-collapse" id="navbarNav">
             <ul class="navbar-nav">
-                <li class="nav-item">
-                    <a class="nav-link" href="inicio">Página Inicial</a>
-                </li>
-                <li class="nav-item">
-                    <a class="nav-link" href="cliente">Clientes</a>
-                </li>
-                <li class="nav-item">
-                    <a class="nav-link" href="servico">Servicos</a>
-                </li>
-                <li class="nav-item">
-                    <a class="nav-link active" href="funcionario" aria-current="page">Funcionarios</a>
-                </li>
+                <li class="nav-item"><a class="nav-link" href="inicio">Página Inicial</a></li>
+                <li class="nav-item"><a class="nav-link" href="cliente">Clientes</a></li>
+                <li class="nav-item"><a class="nav-link" href="servico">Servicos</a></li>
+                <li class="nav-item"><a class="nav-link active" href="funcionario" aria-current="page">Funcionarios</a></li>
+                <li class="nav-item"><a class="nav-link" href="agendamento">Agendamentos</a></li>
             </ul>
-
             <ul class="navbar-nav ms-auto mb-2 mb-lg-0 me-5">
-                <li class="nav-item">
-                    <a class="nav-link" href="login">Sair</a>
-                </li>
+                <li class="nav-item"><a class="nav-link" href="login">Sair</a></li>
             </ul>
-
         </div>
     </div>
 </nav>
 
 <h1 class="text-center">Cadastro de funcionarios</h1>
+
 <div class="d-flex justify-content-lg-center">
-    <form action="funcionario" method="post" class="w-50">
-
-        <c:choose>
-            <c:when test="${funcionario.id != null}">
-                <h2>Editar Funcionario</h2>
-                <input type="hidden" name="idfuncionario" value="${funcionario.id}">
-            </c:when>
-            <c:otherwise>
-                <h2>Adicionar Funcionario</h2>
-                <input type="hidden" name="idfuncionario" value="0">
-            </c:otherwise>
-        </c:choose>
+    <form:form action="funcionario" method="post" modelAttribute="funcionario" class="w-50">
+        <h2>${funcionario.id != null && funcionario.id > 0 ? 'Editar Funcionario' : 'Adicionar Funcionario'}</h2>
+        <form:hidden path="id"/>
 
         <div class="mb-1">
-            <label for="nome" class="form-label">Nome:</label>
-            <input type="text" class="form-control" id="Nome" placeholder="Nome" name="nome" required
-                   value="${funcionario.nome}">
+            <form:label path="nome" class="form-label">Nome:</form:label>
+            <form:input path="nome" class="form-control" placeholder="Nome" required="true"/>
         </div>
         <div class="mb-1">
-            <label for="email" class="form-label">Email:</label>
-            <input type="email" class="form-control" id="Email" placeholder="Email" name="email" required
-                   value="${funcionario.email}">
+            <form:label path="email" class="form-label">Email:</form:label>
+            <form:input path="email" type="email" class="form-control" placeholder="Email" required="true"/>
         </div>
         <div class="mb-1">
-            <label for="Senha" class="form-label">Senha:</label>
-            <input type="password" class="form-control" id="Senha" placeholder="Senha" name="senha" required
-                   value="${funcionario.senha}">
+            <form:label path="senha" class="form-label">Senha:</form:label>
+            <form:password path="senha" class="form-control" placeholder="Senha" required="true"/>
         </div>
 
-        <c:choose>
-            <c:when test="${funcionario.id != null}">
-                <input type="submit" value="Alterar" name="gravar" class="btn btn-primary">
-            </c:when>
-            <c:otherwise>
-                <input type="submit" value="Cadastrar" name="gravar" class="btn btn-primary">
-            </c:otherwise>
-        </c:choose>
-    </form>
+        <input type="submit" value="${funcionario.id != null && funcionario.id > 0 ? 'Alterar' : 'Cadastrar'}"
+               class="btn btn-primary mt-3"/>
+    </form:form>
 </div>
-
 
 <div class="d-flex justify-content-lg-center mb-2">
     <c:if test="${not empty msg}">
         <h3 class="text-center"><u>${msg}</u></h3>
     </c:if>
-
 </div>
+
 <div class="d-flex justify-content-lg-center">
     <h1 class="text-center">Lista de Funcionarios</h1>
 </div>
 
 <div class="d-flex justify-content-lg-center">
     <table class="table table-bordered w-50">
-        <th>Nome</th>
-        <th>Email</th>
-        <th>Ações</th>
+        <thead>
+        <tr>
+            <th>Nome</th>
+            <th>Email</th>
+            <th>Ações</th>
+        </tr>
+        </thead>
+        <tbody>
         <c:forEach var="funcionario" items="${funcionarios}">
             <tr>
                 <td>${funcionario.nome}</td>
                 <td>${funcionario.email}</td>
                 <td>
-                    <a href="funcionario?opcao=editar&&info=${funcionario.id}" class="btn btn-warning btn-sm me-2">Editar</a>
-                    <a href="funcionario?opcao=excluir&&info=${funcionario.id}"
-                       class="btn btn-danger btn-sm">Excluir</a>
+                    <a href="funcionario/editar/${funcionario.id}" class="btn btn-warning btn-sm me-2">Editar</a>
+                    <a href="funcionario/excluir/${funcionario.id}" class="btn btn-danger btn-sm">Excluir</a>
                 </td>
             </tr>
         </c:forEach>
+        </tbody>
     </table>
 </div>
 

@@ -1,6 +1,6 @@
 <%@page contentType="text/html; charset=UTF-8" language="java" %>
 <%@taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
-<%@ taglib prefix="C" uri="http://java.sun.com/jsp/jstl/core" %>
+<%@taglib prefix="form" uri="http://www.springframework.org/tags/form" %>
 <%@page isELIgnored="false" %>
 
 <html>
@@ -20,26 +20,15 @@
         </button>
         <div class="collapse navbar-collapse" id="navbarNav">
             <ul class="navbar-nav">
-                <li class="nav-item">
-                    <a class="nav-link" href="inicio">Página Inicial</a>
-                </li>
-                <li class="nav-item">
-                    <a class="nav-link active" href="cliente" aria-current="page">Clientes</a>
-                </li>
-                <li class="nav-item">
-                    <a class="nav-link" href="servico">Servicos</a>
-                </li>
-                <li class="nav-item">
-                    <a class="nav-link" href="funcionario">Funcionarios</a>
-                </li>
+                <li class="nav-item"><a class="nav-link" href="inicio">Página Inicial</a></li>
+                <li class="nav-item"><a class="nav-link active" href="cliente" aria-current="page">Clientes</a></li>
+                <li class="nav-item"><a class="nav-link" href="servico">Servicos</a></li>
+                <li class="nav-item"><a class="nav-link" href="funcionario">Funcionarios</a></li>
+                <li class="nav-item"><a class="nav-link" href="agendamento">Agendamentos</a></li>
             </ul>
-
             <ul class="navbar-nav ms-auto mb-2 mb-lg-0 me-5">
-                <li class="nav-item">
-                    <a class="nav-link" href="login">Sair</a>
-                </li>
+                <li class="nav-item"><a class="nav-link" href="login">Sair</a></li>
             </ul>
-
         </div>
     </div>
 </nav>
@@ -47,47 +36,27 @@
 <h1 class="text-center">Cadastro de clientes</h1>
 
 <div class="d-flex justify-content-lg-center">
-    <form action="cliente" method="post" class="w-50">
-
-        <c:choose>
-            <c:when test="${cliente.id != null}">
-                <h2>Editar Cliente</h2>
-                <input type="hidden" name="idcliente" value="${cliente.id}">
-            </c:when>
-            <c:otherwise>
-                <h2>Adicionar Cliente</h2>
-                <input type="hidden" name="idcliente" value="0">
-            </c:otherwise>
-        </c:choose>
+    <form:form action="cliente" method="post" modelAttribute="cliente" class="w-50">
+        <h2>${cliente.id != null && cliente.id > 0 ? 'Editar Cliente' : 'Adicionar Cliente'}</h2>
+        <form:hidden path="id"/>
 
         <div class="mb-1">
-            <label for="Nome" class="form-label">Nome:</label>
-            <input type="text" class="form-control" id="Nome" placeholder="Nome" name="nome" required
-                   value="${cliente.nome}">
+            <form:label path="nome" class="form-label">Nome:</form:label>
+            <form:input path="nome" class="form-control" placeholder="Nome" required="true"/>
         </div>
 
         <div class="mb-1">
-            <label for="cpf" class="form-label">Cpf:</label>
-            <input type="text" class="form-control" id="cpf" placeholder="Cpf" name="cpf" required
-                   value="${cliente.cpf}">
+            <form:label path="cpf" class="form-label">Cpf:</form:label>
+            <form:input path="cpf" class="form-control" placeholder="Cpf" required="true"/>
         </div>
 
         <div class="mb-1">
-            <label for="telefone" class="form-label">Telefone:</label>
-            <input type="text" class="form-control" id="telefone" placeholder="Telefone" name="telefone" required
-                   value="${cliente.telefone}">
+            <form:label path="telefone" class="form-label">Telefone:</form:label>
+            <form:input path="telefone" class="form-control" placeholder="Telefone" required="true"/>
         </div>
 
-        <c:choose>
-            <c:when test="${cliente.id != null}">
-                <button type="submit" value="Alterar" name="gravar" class="btn btn-primary mt-3">Alterar</button>
-            </c:when>
-            <c:otherwise>
-                <button type="submit" value="Cadastrar" name="gravar" class="btn btn-primary">Cadastrar</button>
-            </c:otherwise>
-        </c:choose>
-
-    </form>
+        <input type="submit" value="${cliente.id != null && cliente.id > 0 ? 'Alterar' : 'Cadastrar'}" class="btn btn-primary mt-3"/>
+    </form:form>
 </div>
 
 <div class="d-flex justify-content-lg-center mb-2">
@@ -113,8 +82,8 @@
                 <td>${cliente.telefone}</td>
 
                 <td>
-                    <a href="cliente?opcao=editar&&info=${cliente.id}" class="btn btn-warning btn-sm me-2">Editar</a>
-                    <a href="cliente?opcao=excluir&&info=${cliente.id}" class="btn btn-danger btn-sm">Excluir</a>
+                    <a href="cliente/editar/${cliente.id}" class="btn btn-warning btn-sm me-2">Editar</a>
+                    <a href="cliente/excluir/${cliente.id}" class="btn btn-danger btn-sm">Excluir</a>
                 </td>
             </tr>
         </c:forEach>
