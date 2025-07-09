@@ -64,6 +64,7 @@ public class ClienteDAO {
         } catch (SQLException | ClassNotFoundException e) {
             System.out.println(e.getMessage());
             System.out.println("Erro ao excluir cliente");
+            return false;
         }
 
         return true;

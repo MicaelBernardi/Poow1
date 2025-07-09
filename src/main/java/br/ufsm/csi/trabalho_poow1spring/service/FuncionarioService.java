@@ -14,6 +14,11 @@ public class FuncionarioService {
     }
 
     public String alterar(Funcionario funcionario) {
+
+        if(funcionario.getSenha().isEmpty()){
+            Funcionario f = new FuncionarioService().buscar(funcionario.getId());
+            funcionario.setSenha(f.getSenha());
+        }
         return dao.alterar(funcionario);
     }
 

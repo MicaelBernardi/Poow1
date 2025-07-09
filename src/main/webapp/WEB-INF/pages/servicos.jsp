@@ -8,6 +8,8 @@
     <title>Servicos</title>
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.6/dist/css/bootstrap.min.css" rel="stylesheet"
           integrity="sha384-4Q6Gf2aSP4eDXB8Miphtr37CMZZQ5oXLH2yaXMJ2w8e2ZtHTl7GptT4jmndRuHDT" crossorigin="anonymous">
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"></script>
+
 </head>
 <body>
 
@@ -27,7 +29,7 @@
                 <li class="nav-item"><a class="nav-link" href="agendamento">Agendamentos</a></li>
             </ul>
             <ul class="navbar-nav ms-auto mb-2 mb-lg-0 me-5">
-                <li class="nav-item"><a class="nav-link" href="login">Sair</a></li>
+                <li class="nav-item"><a class="nav-link" href="logout">Sair</a></li>
             </ul>
         </div>
     </div>
@@ -54,11 +56,6 @@
     </form:form>
 </div>
 
-<div class="d-flex justify-content-lg-center mb-2">
-    <c:if test="${not empty msg}">
-        <h3 class="text-center"><u>${msg}</u></h3>
-    </c:if>
-</div>
 
 <div class="d-flex justify-content-lg-center">
     <h1 class="text-center">Lista de Servicos</h1>
@@ -82,5 +79,32 @@
     </table>
 </div>
 
+<c:if test="${not empty msg}">
+    <div class="toast-container position-fixed bottom-0 end-0 p-3" style="z-index: 9999">
+        <div id="toastMsg" class="toast align-items-center bg-warning text-white border-2" role="alert" aria-live="assertive" aria-atomic="true">
+            <div class="d-flex">
+                <div class="toast-body text-dark">
+                        ${msg}
+                </div>
+                <button type="button" class="btn-close btn-close-white me-2 m-auto" data-bs-dismiss="toast" aria-label="Close"></button>
+            </div>
+        </div>
+    </div>
+</c:if>
+
+
 </body>
+<script>
+    document.addEventListener("DOMContentLoaded", function () {
+        const toastEl = document.getElementById("toastMsg");
+
+        if (toastEl) {
+            const toast = new bootstrap.Toast(toastEl, {
+                delay: 5000 // <-- tempo de exibição (em ms)
+            });
+
+            toast.show(); // <-- aqui o Bootstrap adiciona `show` dinamicamente
+        }
+    });
+</script>
 </html>

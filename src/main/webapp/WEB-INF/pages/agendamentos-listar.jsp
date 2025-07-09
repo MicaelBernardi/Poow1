@@ -5,6 +5,7 @@
     <title>Lista de Agendamentos</title>
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.6/dist/css/bootstrap.min.css" rel="stylesheet"
           crossorigin="anonymous"/>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"></script>
 </head>
 <body>
 
@@ -24,7 +25,7 @@
                 <li class="nav-item"><a class="nav-link active" href="agendamento" aria-current="page">Agendamentos</a></li>
             </ul>
             <ul class="navbar-nav ms-auto mb-2 mb-lg-0 me-5">
-                <li class="nav-item"><a class="nav-link" href="login">Sair</a></li>
+                <li class="nav-item"><a class="nav-link" href="logout">Sair</a></li>
             </ul>
         </div>
     </div>
@@ -50,42 +51,70 @@
 
     </div>
 
-    <table class="table table-bordered table-striped w-100 mx-auto">
-        <thead class="table-light">
-        <tr>
-            <th>Data</th>
-            <th>Cliente</th>
-            <th>Funcionário</th>
-            <th>Serviço</th>
-            <th>Status</th>
-            <th>Opções</th>
-        </tr>
-        </thead>
-        <tbody>
-        <c:forEach var="agendamento" items="${agendamentos}">
+    <div class="table-responsive">
+        <table class="table table-bordered table-striped w-100 mx-auto text-nowrap">
+            <thead class="table-light">
             <tr>
-                <td><c:out value="${agendamento.data}"/></td>
-                <td><c:out value="${agendamento.cliente.nome}"/></td>
-                <td><c:out value="${agendamento.funcionario.nome}"/></td>
-                <td><c:out value="${agendamento.servico.descricao}"/></td>
-                <td><c:out value="${agendamento.status}"/></td>
-                <td>
-                    <a href="/agendamento/editar/${agendamento.id}" class="btn btn-warning btn-sm me-2">Editar</a>
-                    <a href="/agendamento/excluir/${agendamento.id}" class="btn btn-danger btn-sm me-2">Excluir</a>
-
-                    <c:if test="${agendamento.status == 'Agendado'}">
-                        <a href="/agendamento/finalizar/${agendamento.id}"
-                           class="btn btn-success btn-sm"
-                           onclick="return confirm('Tem certeza que deseja finalizar este agendamento?');">
-                            Finalizar
-                        </a>
-                    </c:if>
-                </td>
+                <th>Data</th>
+                <th>Cliente</th>
+                <th>Funcionário</th>
+                <th>Serviço</th>
+                <th>Status</th>
+                <th style="width: 150px;" class="text-center">Opções</th>
             </tr>
-        </c:forEach>
-        </tbody>
-    </table>
+            </thead>
+            <tbody>
+            <c:forEach var="agendamento" items="${agendamentos}">
+                <tr>
+                    <td><c:out value="${agendamento.data}"/></td>
+                    <td><c:out value="${agendamento.cliente.nome}"/></td>
+                    <td><c:out value="${agendamento.funcionario.nome}"/></td>
+                    <td><c:out value="${agendamento.servico.descricao}"/></td>
+                    <td><c:out value="${agendamento.status}"/></td>
+                    <td>
+                        <a href="/agendamento/editar/${agendamento.id}" class="btn btn-warning btn-sm me-2">Editar</a>
+                        <a href="/agendamento/excluir/${agendamento.id}" class="btn btn-danger btn-sm me-2">Excluir</a>
+                        <c:if test="${agendamento.status == 'Agendado'}">
+                            <a href="/agendamento/finalizar/${agendamento.id}"
+                               class="btn btn-success btn-sm"
+                               onclick="return confirm('Tem certeza que deseja finalizar este agendamento?');">
+                                Finalizar
+                            </a>
+                        </c:if>
+                    </td>
+                </tr>
+            </c:forEach>
+            </tbody>
+        </table>
+    </div>
 </div>
 
+<c:if test="${not empty msg}">
+    <div class="toast-container position-fixed bottom-0 end-0 p-3" style="z-index: 9999">
+        <div id="toastMsg" class="toast align-items-center bg-warning text-white border-2" role="alert" aria-live="assertive" aria-atomic="true">
+            <div class="d-flex">
+                <div class="toast-body text-dark">
+                        ${msg}
+                </div>
+                <button type="button" class="btn-close btn-close-white me-2 m-auto" data-bs-dismiss="toast" aria-label="Close"></button>
+            </div>
+        </div>
+    </div>
+</c:if>
+
+
 </body>
+<script>
+    document.addEventListener("DOMContentLoaded", function () {
+        const toastEl = document.getElementById("toastMsg");
+
+        if (toastEl) {
+            const toast = new bootstrap.Toast(toastEl, {
+                delay: 5000 // <-- tempo de exibição (em ms)
+            });
+
+            toast.show(); // <-- aqui o Bootstrap adiciona `show` dinamicamente
+        }
+    });
+</script>
 </html>

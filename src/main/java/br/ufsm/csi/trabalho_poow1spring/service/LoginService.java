@@ -5,12 +5,16 @@ import br.ufsm.csi.trabalho_poow1spring.model.Funcionario;
 
 public class LoginService {
 
-    public boolean autenticar(String email, String senha) {
+    public Funcionario autenticar(String email, String senha) {
 
-        FuncionarioService funcionarioService = new FuncionarioService();
-        Funcionario funcionario = funcionarioService.buscar(email);
+        Funcionario funcionario = new FuncionarioService().buscar(email);
 
-        return senha.equals(funcionario.getSenha());
+        if(funcionario != null && funcionario.getSenha().equals(senha)) {
+            return funcionario;
+        } else {
+            return null;
+        }
+
     }
 
 }

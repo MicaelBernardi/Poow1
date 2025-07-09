@@ -69,6 +69,7 @@ public class FuncionarioDAO {
         } catch (SQLException | ClassNotFoundException e) {
             System.out.println(e.getMessage());
             System.out.println("Erro ao excluir funcionario");
+            return false;
         }
 
         return true;

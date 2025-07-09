@@ -69,6 +69,7 @@ public class AgendamentoDAO {
         } catch (SQLException | ClassNotFoundException e) {
             System.out.println(e.getMessage());
             System.out.println("Erro ao excluir agendamento");
+            return false;
         }
 
         return true;

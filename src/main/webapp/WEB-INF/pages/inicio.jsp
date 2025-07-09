@@ -15,27 +15,14 @@
         </button>
         <div class="collapse navbar-collapse" id="navbarNav">
             <ul class="navbar-nav">
-                <li class="nav-item">
-                    <a class="nav-link active" aria-current="page" href="#">Página Inicial</a>
-                </li>
-                <li class="nav-item">
-                    <a class="nav-link" href="cliente">Clientes</a>
-                </li>
-                <li class="nav-item">
-                    <a class="nav-link" href="servico">Serviços</a>
-                </li>
-                <li class="nav-item">
-                    <a class="nav-link" href="funcionario">Funcionários</a>
-                </li>
-                <li class="nav-item">
-                    <a class="nav-link" href="agendamento">Agendamentos</a>
-                </li>
+                <li class="nav-item"><a class="nav-link active" href="inicio" aria-current="page">Página Inicial</a></li>
+                <li class="nav-item"><a class="nav-link" href="cliente">Clientes</a></li>
+                <li class="nav-item"><a class="nav-link" href="servico">Servicos</a></li>
+                <li class="nav-item"><a class="nav-link" href="funcionario">Funcionarios</a></li>
+                <li class="nav-item"><a class="nav-link" href="agendamento">Agendamentos</a></li>
             </ul>
-
             <ul class="navbar-nav ms-auto mb-2 mb-lg-0 me-5">
-                <li class="nav-item">
-                    <a class="nav-link" href="login">Sair</a>
-                </li>
+                <li class="nav-item"><a class="nav-link" href="logout">Sair</a></li>
             </ul>
 
         </div>

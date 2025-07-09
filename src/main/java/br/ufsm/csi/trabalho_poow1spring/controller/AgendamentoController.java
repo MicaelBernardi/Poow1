@@ -13,6 +13,7 @@ import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.WebDataBinder;
 import org.springframework.web.bind.annotation.*;
+import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
 import java.text.SimpleDateFormat;
 import java.util.Date;
@@ -61,29 +62,31 @@ public class AgendamentoController {
     }
 
     @PostMapping("/salvar")
-    public String salvar(@ModelAttribute Agendamento agendamento) {
+    public String salvar(@ModelAttribute Agendamento agendamento, RedirectAttributes redirectAttributes) {
 
         if (agendamento.getId() == null || agendamento.getId() == 0) {
             agendamento.setStatus("Agendado");
         }
-
+        String retorno;
         if (agendamento.getId() != null && agendamento.getId() > 0) {
 
             agendamento.setCliente(clienteService.buscar(agendamento.getCliente().getId()));
             agendamento.setFuncionario(funcionarioService.buscar(agendamento.getFuncionario().getId()));
             agendamento.setServico(servicoService.buscar(agendamento.getServico().getId()));
 
-            agendamentoService.alterar(agendamento);
+            retorno = agendamentoService.alterar(agendamento);
         } else {
-            agendamentoService.inserir(agendamento);
+            retorno = agendamentoService.inserir(agendamento);
         }
+        redirectAttributes.addFlashAttribute("msg", retorno);
 
         return "redirect:/agendamento";
     }
 
     @GetMapping("/excluir/{id}")
-    public String excluir(@PathVariable("id") int id) {
-        agendamentoService.excluir(id);
+    public String excluir(@PathVariable("id") int id, RedirectAttributes redirectAttributes) {
+        redirectAttributes.addFlashAttribute("msg", new AgendamentoService().excluir(id));
+
         return "redirect:/agendamento";
     }
 

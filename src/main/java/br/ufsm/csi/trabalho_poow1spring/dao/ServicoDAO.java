@@ -64,6 +64,7 @@ public class ServicoDAO {
         } catch (SQLException | ClassNotFoundException e) {
             System.out.println(e.getMessage());
             System.out.println("Erro ao excluir servico");
+            return false;
         }
 
         return true;
