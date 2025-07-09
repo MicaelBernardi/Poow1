@@ -16,7 +16,7 @@
         <h1 class="h3 mb-3 font-weight-normal text-center">Entrar no Sistema</h1>
         <label for="inputEmail" class="sr-only">Email:</label>
         <input type="email" id="inputEmail" class="form-control" placeholder="Email" name="email" required autofocus="">
-        <label for="inputPassword" class="sr-only">Senha</label>
+        <label for="inputPassword" class="sr-only">Senha:</label>
         <input type="password" id="inputPassword" class="form-control" placeholder="Senha" name="senha" required>
 
         <button class="btn btn-lg btn-primary btn-block mt-3" type="submit" value="LOGAR" name="login">Entrar</button>

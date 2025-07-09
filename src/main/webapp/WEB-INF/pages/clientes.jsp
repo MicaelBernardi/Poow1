@@ -9,12 +9,15 @@
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.6/dist/css/bootstrap.min.css" rel="stylesheet"
           integrity="sha384-4Q6Gf2aSP4eDXB8Miphtr37CMZZQ5oXLH2yaXMJ2w8e2ZtHTl7GptT4jmndRuHDT" crossorigin="anonymous">
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"></script>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.10.5/font/bootstrap-icons.css" rel="stylesheet">
 </head>
 <body>
 
 <nav class="navbar navbar-expand-lg bg-body-secondary sticky-top fs-5">
     <div class="container-fluid">
-        <a class="navbar-brand fs-4 fw-medium" href="inicio">Agendamentos</a>
+        <a class="navbar-brand fs-4" href="inicio">
+            <i class="bi bi-gear-fill me-2"></i>Concessionária
+        </a>
         <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav"
                 aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
             <span class="navbar-toggler-icon"></span>
@@ -23,12 +26,12 @@
             <ul class="navbar-nav">
                 <li class="nav-item"><a class="nav-link" href="inicio">Página Inicial</a></li>
                 <li class="nav-item"><a class="nav-link active" href="cliente" aria-current="page">Clientes</a></li>
-                <li class="nav-item"><a class="nav-link" href="servico">Servicos</a></li>
+                <li class="nav-item"><a class="nav-link" href="servico">Serviços</a></li>
                 <li class="nav-item"><a class="nav-link" href="funcionario">Funcionarios</a></li>
                 <li class="nav-item"><a class="nav-link" href="agendamento">Agendamentos</a></li>
             </ul>
             <ul class="navbar-nav ms-auto mb-2 mb-lg-0 me-5">
-                <li class="nav-item"><a class="nav-link" href="logout">Sair</a></li>
+                <li class="nav-item"><a class="nav-link text-danger" href="logout"><i class="bi bi-box-arrow-right"></i> Sair</a></li>
             </ul>
         </div>
     </div>
@@ -65,12 +68,12 @@
     <h1 class="text-center">Lista de CLientes</h1>
 </div>
 
-<div class="d-flex justify-content-lg-center">
-    <table class="table table-bordered w-50">
+<div class="table-responsive">
+    <table class="table table-bordered table-striped w-50 mx-auto text-nowrap">
         <th>Nome</th>
         <th>Cpf</th>
         <th>Telefone</th>
-        <th>Ações</th>
+        <th style="width: 150px;" class="text-center">Opções</th>
         <c:forEach var="cliente" items="${clientes}">
             <tr>
                 <td>${cliente.nome}</td>

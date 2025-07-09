@@ -9,13 +9,16 @@
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.6/dist/css/bootstrap.min.css" rel="stylesheet"
           integrity="sha384-4Q6Gf2aSP4eDXB8Miphtr37CMZZQ5oXLH2yaXMJ2w8e2ZtHTl7GptT4jmndRuHDT" crossorigin="anonymous">
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"></script>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.10.5/font/bootstrap-icons.css" rel="stylesheet">
 
 </head>
 <body>
 
 <nav class="navbar navbar-expand-lg bg-body-secondary sticky-top fs-5">
     <div class="container-fluid">
-        <a class="navbar-brand fs-4 fw-medium" href="inicio">Agendamentos</a>
+        <a class="navbar-brand fs-4" href="inicio">
+            <i class="bi bi-gear-fill me-2"></i>Concessionária
+        </a>
         <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav"
                 aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
             <span class="navbar-toggler-icon"></span>
@@ -24,12 +27,12 @@
             <ul class="navbar-nav">
                 <li class="nav-item"><a class="nav-link" href="inicio">Página Inicial</a></li>
                 <li class="nav-item"><a class="nav-link" href="cliente">Clientes</a></li>
-                <li class="nav-item"><a class="nav-link active" href="servico" aria-current="page">Servicos</a></li>
+                <li class="nav-item"><a class="nav-link active" href="servico" aria-current="page">Serviços</a></li>
                 <li class="nav-item"><a class="nav-link" href="funcionario">Funcionarios</a></li>
                 <li class="nav-item"><a class="nav-link" href="agendamento">Agendamentos</a></li>
             </ul>
             <ul class="navbar-nav ms-auto mb-2 mb-lg-0 me-5">
-                <li class="nav-item"><a class="nav-link" href="logout">Sair</a></li>
+                <li class="nav-item"><a class="nav-link text-danger" href="logout"><i class="bi bi-box-arrow-right"></i> Sair</a></li>
             </ul>
         </div>
     </div>
@@ -56,16 +59,16 @@
     </form:form>
 </div>
 
-
+<div class="container">
 <div class="d-flex justify-content-lg-center">
     <h1 class="text-center">Lista de Servicos</h1>
 </div>
 
-<div class="d-flex justify-content-lg-center">
-    <table class="table table-bordered w-50">
+<div class="table-responsive">
+    <table class="table table-bordered table-striped w-75 mx-auto text-nowrap">
         <th>Descricao</th>
         <th>Valor</th>
-        <th>Ações</th>
+        <th style="width: 150px;" class="text-center">Opções</th>
         <c:forEach var="servico" items="${servicos}">
             <tr>
                 <td>${servico.descricao}</td>
@@ -78,7 +81,7 @@
         </c:forEach>
     </table>
 </div>
-
+</div>
 <c:if test="${not empty msg}">
     <div class="toast-container position-fixed bottom-0 end-0 p-3" style="z-index: 9999">
         <div id="toastMsg" class="toast align-items-center bg-warning text-white border-2" role="alert" aria-live="assertive" aria-atomic="true">

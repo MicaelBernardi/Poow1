@@ -6,12 +6,15 @@
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.6/dist/css/bootstrap.min.css" rel="stylesheet"
           crossorigin="anonymous"/>
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"></script>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.10.5/font/bootstrap-icons.css" rel="stylesheet">
 </head>
 <body>
 
 <nav class="navbar navbar-expand-lg bg-body-secondary sticky-top fs-5">
     <div class="container-fluid">
-        <a class="navbar-brand fs-4 fw-medium" href="inicio">Agendamentos</a>
+        <a class="navbar-brand fs-4" href="inicio">
+            <i class="bi bi-gear-fill me-2"></i>Concessionária
+        </a>
         <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav"
                 aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
             <span class="navbar-toggler-icon"></span>
@@ -20,12 +23,12 @@
             <ul class="navbar-nav">
                 <li class="nav-item"><a class="nav-link" href="inicio">Página Inicial</a></li>
                 <li class="nav-item"><a class="nav-link" href="cliente">Clientes</a></li>
-                <li class="nav-item"><a class="nav-link" href="servico">Servicos</a></li>
+                <li class="nav-item"><a class="nav-link" href="servico">Serviços</a></li>
                 <li class="nav-item"><a class="nav-link" href="funcionario">Funcionarios</a></li>
                 <li class="nav-item"><a class="nav-link active" href="agendamento" aria-current="page">Agendamentos</a></li>
             </ul>
             <ul class="navbar-nav ms-auto mb-2 mb-lg-0 me-5">
-                <li class="nav-item"><a class="nav-link" href="logout">Sair</a></li>
+                <li class="nav-item"><a class="nav-link text-danger" href="logout"><i class="bi bi-box-arrow-right"></i> Sair</a></li>
             </ul>
         </div>
     </div>
@@ -73,7 +76,9 @@
                     <td><c:out value="${agendamento.status}"/></td>
                     <td>
                         <a href="/agendamento/editar/${agendamento.id}" class="btn btn-warning btn-sm me-2">Editar</a>
-                        <a href="/agendamento/excluir/${agendamento.id}" class="btn btn-danger btn-sm me-2">Excluir</a>
+                        <a href="/agendamento/excluir/${agendamento.id}" class="btn btn-danger btn-sm me-2" onclick="return confirm('Tem certeza que deseja excluir este agendamento?');">
+                            Excluir
+                        </a>
                         <c:if test="${agendamento.status == 'Agendado'}">
                             <a href="/agendamento/finalizar/${agendamento.id}"
                                class="btn btn-success btn-sm"

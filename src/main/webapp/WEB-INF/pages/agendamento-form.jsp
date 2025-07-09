@@ -36,7 +36,7 @@
         </div>
 
         <div class="mb-3">
-            <form:label path="funcionario.id" class="form-label">Funcionário:</form:label>
+            <form:label path="funcionario.id" class="form-label">Funcionário Responsavel:</form:label>
             <form:select path="funcionario.id" cssClass="form-select select2" required="true">
                 <form:option value="" label="-- Selecione --"/>
                 <form:options items="${funcionarios}" itemValue="id" itemLabel="nome"/>
